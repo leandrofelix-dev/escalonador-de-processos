@@ -24,5 +24,8 @@
     "javascript",
     "operational system"
   ],
-  "author": "lehfelix.io"
+  "author": "lehfelix.io",
+  "dependencies": {
+    "neat-csv": "^7.0.0"
+  }
 }

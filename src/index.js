@@ -1,5 +1,5 @@
 
-// * Importação do módulo para manipulação de arquivos
+// * Importação dos módulos <fs> e <neatCsv> para manipulação de arquivos
 const fs = require('node:fs');
 
 // * Definição das flags de execução do sistema:
@@ -11,11 +11,20 @@ const urlCSV = process.argv[2];
 const modo = process.argv[3];
 const modoExecucao = process.argv[4];
 
+let matriz_dos_processos = [];
+
 const arquivo = fs.readFileSync(urlCSV, 'utf-8');
 console.log({ urlCSV, modo, modoExecucao });
 
-const lines = arquivo.split('\n');
-console.log('Linhas: ', lines.lenght);
+const processos = arquivo.split('\n');
 
-lines.forEach(line => console.log(line));
+// Percorre o arquivo "splitado" por vírgulas e atribui seus valores à matriz
+for (let i = 1; i < processos.length - 1; i++) {
+    matriz_dos_processos[i] = processos[i];
 
+    console.log("Processo", i, ":", matriz_dos_processos[i]);
+}
+
+
+
+/* ======================================================= */
