@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Sem problemas de execução encontrados\" && exit 1",
-    "fifs-1": "node src/index.js processos.csv FIFS 1",
-    "fifs-2": "node src/index.js processos.csv FIFS 2",
+    "fcfs-1": "node src/index.js processos.csv FCFS 1",
+    "fcfs-2": "node src/index.js processos.csv FCFS 2",
     "srtf-1": "node src/index.js processos.csv SRTF 1",
     "srtf-2": "node src/index.js processos.csv SRTF 2",
     "rr-1": "node src/index.js processos.csv RR 1",
