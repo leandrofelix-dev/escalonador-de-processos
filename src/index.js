@@ -1,4 +1,3 @@
-
 // * Importação dos módulos <fs> para manipulação de arquivos
 const fs = require('node:fs');
 
@@ -15,58 +14,76 @@ const arquivoCSV = fs.readFileSync(urlCSV, 'utf-8');
 
 console.log({ urlCSV, modoEscalonamento, modoExecucao });
 
+// Leitura do arquivo CSV através da biblioteca fs:node
 const processos = arquivoCSV.split('\n');
 
-switch (modoEscalonamento) {
-    case "FCFS":
-        fcfs(modoExecucao);
-        break;
-    case "SRTF":
-        // srtf(modoExecucao);
-        break;
-    case "RR":
-        // rr();
-        break;
-    case "SRTPF":
-        // srtpf(modoExecucao);
-        break;
-    case "PRIO":
-        // prio(modoExecucao);
-        break;
-    case "PRIOP":
-        // priop(modoExecucao);
-        break;
+for (let i = 1; i < processos.length; i++) {
+    // Separação do objeto processos em um array para cada processo
+    let processo = processos[i].split(',');
 
-    default:
-        console.log("Insira um parâmetro válido");
-        break;
+    // Atribuição dos elementos de cada array() em uma variável distinta
+    //Função Number() converte o tipo de variável para StringType
+    let idProcesso = processo[0];
+    let chegadaProcesso = Number(processo[1]);
+    let rajadaProcesso = Number(processo[2]);
+    let prioridadeProcesso = Number(processo[3]);
+
+    // Definição das variáveis auxiliares
+    let tempoFinalizacao = (chegadaProcesso + rajadaProcesso);
+
+    // Determina a função a ser executada baseada no modo de escalonamento
+    switch (modoEscalonamento) {
+        case "TEST":
+            //Execução da função de teste, para debug da aplicação
+            test(i, idProcesso, chegadaProcesso, rajadaProcesso, prioridadeProcesso);
+            break;
+        case "FCFS":
+            fcfs(modoExecucao, idProcesso, tempoFinalizacao);
+            break;
+        case "SRTF":
+            srtf(modoExecucao);
+            break;
+        case "RR":
+            rr();
+            break;
+        case "SRTPF":
+            srtpf(modoExecucao);
+            break;
+        case "PRIO":
+            prio(modoExecucao);
+            break;
+        case "PRIOP":
+            priop(modoExecucao);
+            break;
+
+        default:
+            console.log("Insira um parâmetro válido");
+            break;
+    }
 }
 
+// Função de debug
+function test(i, idProcesso, chegadaProcesso, rajadaProcesso, prioridadeProcesso) {
+    console.log("# Processo", i);
+    console.log("ID:", idProcesso);
+    console.log("Chegada:", chegadaProcesso);
+    console.log("Rajada:", rajadaProcesso)
+    console.log("Prioridade:", prioridadeProcesso);
 
-function fcfs(modoExecucao) {
+    console.log("\n ====================================================== \n");
+}
+
+function fcfs(modoExecucao, idProcesso, tempoFinalizacao) {
 
     /* MODO DE EXECUÇÃO FCFS */
 
-    let processo = processos[1].split(',');
-    let chegadaProcesso = Number(processo[1]); //Função Number() converte o tipo de variável para StringType
-    let rajadaProcesso = Number(processo[2]);
-
-    let tempoFinalizacao = (chegadaProcesso + rajadaProcesso);
-    
-
-    // for (let i = 1; i < processos.length; i++) {
-    //     console.log(processos[i]); //! Esse valor no parâmetro do vetor refere-se ao processo individualmente
-    //     let tempo_de_finalizacao = (processos[i][1] + processos[i][2]);
-    //     console.log("Tempo de execução do processo: ", tempo_de_finalizacao);
-    //     console.log("Processo", i, ":", matriz_dos_processos[i]);
-    //     processos_splitados[i] = processos[i].split('/n');
-    //     console.log("Processo: ", processos_splitados);
-    //     console.log("Tempo de execução: ", tempo_de_finalizacao);
-    // }
+    if (modoExecucao == 1) {
+        console.log("O ID do processo é: ", idProcesso, "\n O tempo de finalização do projeto é: ", tempoFinalizacao);
+    }
+    else {
+        console.log("MODO 2");
+    }
 
 }
-
-
-
 
 /* ======================================================= */
