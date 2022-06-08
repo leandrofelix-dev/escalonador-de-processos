@@ -12,12 +12,10 @@ const modoExecucao = Number(process.argv[4]);
 
 const arquivoCSV = fs.readFileSync(urlCSV, 'utf-8');
 
+// Declaração das variáveis auxiliares
 let processo, idProcesso, chegadaProcesso, rajadaProcesso, prioridadeProcesso, tempoTotalProcessamento, tempoTotalEspera, quantidadeTrocasContexto, tempoFinalizacao;
-
 let tempo = 1;
-
 let finalizou = false;
-
 // Vetor que armazena os IDS na ordem de finalização dos processos
 let ordemfinalizacao = new Array;
 
@@ -36,7 +34,7 @@ switch (modoEscalonamento) {
         test(idProcesso, chegadaProcesso, rajadaProcesso, prioridadeProcesso);
         break;
     case "FCFS":
-        fcfs(modoExecucao, ordemfinalizacao, finalizacaoProcesso, idProcesso, tempoFinalizacao, finalizou, tempo);
+        fcfs(modoExecucao, ordemfinalizacao, finalizacaoProcesso, idProcesso, tempoTotalProcessamento, tempo);
         break;
     case "SRTF":
         srtf(modoExecucao);
@@ -78,14 +76,11 @@ function test(idProcesso, chegadaProcesso, rajadaProcesso, prioridadeProcesso) {
         console.log("Rajada:", rajadaProcesso)
         console.log("Prioridade:", prioridadeProcesso);
         console.log("\n ====================================================== \n");
-
     }
-
 }
 
-
 /* MODO DE EXECUÇÃO FCFS */
-function fcfs(modoExecucao, ordemFinalizacao, finalizacaoProcesso, idProcesso, tempoFinalizacao, finalizou, tempo) {
+function fcfs(modoExecucao, ordemfinalizacao, finalizacaoProcesso, idProcesso, tempoTotalProcessamento, tempo) {
 
     for (let i = 1; i < processos.length; i++) {
         // Separação do objeto processos em um array para cada processo
@@ -108,17 +103,19 @@ function fcfs(modoExecucao, ordemFinalizacao, finalizacaoProcesso, idProcesso, t
         // ! finalizacaoProcesso || ordemfinalizacao
     }
 
+    tempoTotalProcessamento = finalizacaoProcesso[(processos.length) - 2];
+
     //* O vetor processo já está na ordem de finalização correta, logo, não necessita ser alterado.
     switch (modoExecucao) {
         case 1:
-            // Execução do [modo 1] de visualização
+            // FCFS == MODO 1 ==
             for (let i = 0; i < processos.length - 1; i++) {
                 console.log("O processo", ordemfinalizacao[i], "encerrou no tempo: ", finalizacaoProcesso[i]);
-
             }
             break;
         case 2:
-            // Execução do [modo 2] de visualização
+            // FCFS == MODO 2 ==
+            console.log(" O tempo total de execução do processamento foi de", tempoTotalProcessamento, "unidades de tempo");
             break;
         default:
             console.log("Valor inválido");
