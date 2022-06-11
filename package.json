@@ -9,6 +9,8 @@
     "fcfs-2": "node src/index.js processos.csv FCFS 2",
     "srtf-1": "node src/index.js processos.csv SRTF 1",
     "srtf-2": "node src/index.js processos.csv SRTF 2",
+    "srtfp-1": "node src/index.js processos.csv SRTFP 1",
+    "srtfp-2": "node src/index.js processos.csv SRTFP 2",
     "rr-1": "node src/index.js processos.csv RR 1",
     "rr-2": "node src/index.js processos.csv RR 2",
     "srtpf-1": "node src/index.js processos.csv SRTPF 1",
