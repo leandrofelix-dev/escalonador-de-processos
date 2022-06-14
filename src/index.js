@@ -11,7 +11,7 @@
     - Cicero Danilo do Nascimento Pereira
 */
 
-
+/* ================= PARTE 1 () ================= */
 // * Importação dos módulos <fs> para manipulação de arquivos
 const fs = require("node:fs");
 
@@ -56,24 +56,30 @@ function maiorExecucoes(a, b) {
   return 0;
 }
 
+/* ================= PARTE 2 (MANIPULANDO O CSV PARA TRABALHARMOS COM ELE) ================= */
+
 // * Definição das flags de execução do sistema:
 // < urlCSV > [Armazena o endereço do arquivo CSV]
 // < modo > [Refere-se ao modo de escalonamento dos processos]
 // < modoExecucao > [Refere-se a exibição simplificada ou detalhada]
 
+
+//  Declaração das variáveis de leitura das flags passadas via terminal
 const urlCSV = process.argv[2];
 const modoEscalonamento = process.argv[3];
 const modoExecucao = Number(process.argv[4]);
 
+//  Leitura do csv através da biblioteca fs, do NodeJs
 const arquivoCSV = fs.readFileSync(urlCSV, "utf-8");
 
-// Armazena todas as instancias de processos
+//  Armazena todas as instancias de processos
 var processos = new Array();
 var processosProntos = new Array();
 
-// Armazena o tempo
+//  Armazena o tempo
 var tempo = 1;
 
+//  Constructor function da classe Processo
 class Processo {
   constructor(id, chegada, rajada, prioridade) {
     this.id = id;
@@ -103,21 +109,22 @@ class Processo {
 
 console.log({ urlCSV, modoEscalonamento, modoExecucao });
 
-// Leitura do arquivo CSV através da biblioteca fs:node
+// Leitura do arquivo CSV através da biblioteca fs:node e separação por quebra de linha
 const arquivo = arquivoCSV.split("\n");
 
-// Para  cada linha do arquivo csv
-// exceto a primeira, pois são os cabeçalhos
+// Para cada linha do arquivo csv, exceto a primeira, pois são os cabeçalhos
 for (let linha = 1; linha < arquivo.length; linha++) {
   // id | chegada | rajada | prioridade
   let split = arquivo[linha].split(",");
 
-  // cria um processo com os dados acima
+  // Cria um processo com os dados acima(instanciando a classe processo e atribuindo a ela os valores de cada linha(processo))
   let processo = new Processo(split[0][1], split[1], split[2], split[3][0]);
 
-  // envia o processo para a variavel global processos
+  // Envia o processo para a variavel global processos (último elemento do array)
   processos.push(processo);
 }
+
+/* ================= PARTE 3 (TRABALHANDO OS ARGUMENTOS PASSADOS PELO TERMINAL) ================= */
 
 // Determina a função a ser executada baseada no modo de escalonamento
 switch (modoEscalonamento) {
@@ -149,9 +156,11 @@ switch (modoEscalonamento) {
     break;
 }
 
+/* ================= PARTE 4 (TRABALHANDO OS ESCALONAMENTOS) ================= */
+
 /* MODO DE DEBUG PARA O DESENVOLVIMENTO */
 function test() {
-  console.log("oi");
+  console.log("Sistema funcionando 🚀");
 }
 
 function fcfs(modoExecucao) {

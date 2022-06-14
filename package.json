@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "sistema desenvolvido para disciplina de sistemas operacionais",
   "main": "src/index.js",
+  "license": "UNLICENSED",
+  "private": true,
   "scripts": {
     "test": "node src/index.js processos.csv TEST 1",
     "fcfs-1": "node src/index.js processos.csv FCFS 1",
